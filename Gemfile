@@ -66,3 +66,5 @@ gem "activeadmin"
 gem "devise"
 
 gem "sass-rails"
+
+gem "faker", "~> 3.5.1"
