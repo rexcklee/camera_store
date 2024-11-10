@@ -1,16 +1,29 @@
 ActiveAdmin.register Product do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
-  permit_params :name, :description, :price_cents, :category_id, :brand_id, :stock_quantity
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:name, :description, :price_cents, :category_id, :brand_id, :stock_quantity]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  permit_params :name, :description, :price_cents, :category_id, :brand_id, :stock_quantity, :image
+
+  form do |f|
+    f.semantic_errors
+    f.inputs
+    f.inputs do
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, style: "height:200px") : ""
+    end
+    f.actions
+  end
+
+  index do
+    column :id
+    column :name
+    column :category
+    column :brand
+    column :description
+    column :price_cents
+    column :stock_quantity
+    column :created_at
+    column :updated_at
+    column "Image" do |product|
+      # customer.image.present? ? customer.image.filename : ""
+      product.image.present? ? image_tag(product.image, style: "height:100px") : ""
+    end
+    actions
+  end
 end
