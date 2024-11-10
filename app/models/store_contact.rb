@@ -1,0 +1,2 @@
+class StoreContact < ApplicationRecord
+end
