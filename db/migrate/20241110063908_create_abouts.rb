@@ -1,6 +1,6 @@
-class CreateAboutUs < ActiveRecord::Migration[8.0]
+class CreateAbouts < ActiveRecord::Migration[8.0]
   def change
-    create_table :about_us do |t|
+    create_table :abouts do |t|
       t.string :title
       t.text :content
 
