@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @products = Product.where(category_id: params[:id])
+    @category = Category.find(params[:id])
+    @products = Product.where(category_id: params[:id]).page(params[:page])
   end
 end

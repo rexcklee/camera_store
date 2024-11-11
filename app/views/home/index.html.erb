@@ -1,9 +1,14 @@
 <h1>Home</h1>
 
-<% @categories.each do |category| %>
-      <ul >
-        <li class="text-center text-yellow-500 hover:text-orange-500">
-          <%= link_to category.name, category%>
-        </li>
-      </ul>
+<div class="flex justify-evenly ">
+    <% @categories.each do |category| %>
+        <div class="bg-white border-2 border-blue-200 rounded-2xl p-3">
+            <% if category.image.present? %>
+                <p><%= link_to image_tag(category.image, style: 'height:150px', class:'m-auto') , category %></p>
+            <% end %>
+            <p class="text-center text-2xl text-yellow-500 hover:text-orange-500">
+                <%= link_to category.name, category%>
+            </p>
+        </div>
     <% end %>
+</div>
