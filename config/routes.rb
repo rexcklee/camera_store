@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get "products/index" => "products#index", as: "products"
+  # get "products/show"
+  get "/products/:id", to: "products#show", as: "product", constraints: { id: /\d+/ }
+  # get "products/search"
+  get "/products/search/", to: "products#search", as: "products_search"
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
