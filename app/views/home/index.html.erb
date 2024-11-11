@@ -1,1 +1,9 @@
 <h1>Home</h1>
+
+<% @categories.each do |category| %>
+      <ul >
+        <li class="text-center text-yellow-500 hover:text-orange-500">
+          <%= link_to category.name, category%>
+        </li>
+      </ul>
+    <% end %>

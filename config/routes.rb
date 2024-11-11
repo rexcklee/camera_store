@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "categories/index"
+  get "/categories/:id", to: "categories#show", as: "category", constraints: { id: /\d+/ }
+  # get "categories/show"
   get "products/index" => "products#index", as: "products"
   # get "products/show"
   get "/products/:id", to: "products#show", as: "product", constraints: { id: /\d+/ }

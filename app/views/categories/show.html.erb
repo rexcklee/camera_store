@@ -1,0 +1,16 @@
+<h1 class='text-3xl text-center mb-5'>Products under category</h1>
+
+<% @products.each do |product| %>
+<div class='flex justify-center items-center border-2 border-black w-3/5 m-auto mb-5'>
+    <div class='basis-1/2'>
+        <% if product.image.present? %>
+          <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
+        <% end %>
+    </div>
+    <div class='p-4 basis-1/2'>
+        <h3>Model: <%= link_to product.name, product %></h3>
+        <p>Brand: <%= product.brand.name %></p>
+        <p>Category: <%= product.category.name %></p>
+    </div>
+</div>
+<%end%>
