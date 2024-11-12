@@ -1,9 +1,10 @@
 <div class="flex flex-col">
+    <% @abouts.each do |about| %>
     <div class="text-3xl text-center mb-10">
-        <h1>About Winnipeg Best Camera</h1>
+        <h1><%= about.title %></h1>
     </div>
     <div class="text-2xl mb-10">
-        <p class="mb-5">"Winnipeg Best Camera" is a camera equipment store that has been selling camera-related products in Winnipeg since 2014. Our physical store is located in downtown Winnipeg. We offer a wide range of camera equipment, including camera bodies, lenses, and accessories such as tripods, flashes, and memory cards. We also selling our products online, allowing not only local customers but also those across Canada to shop their products through our website.</p>
+        <p class="mb-5"><%= about.content %></p>
     </div>
-
+    <%end%>
 </div>
