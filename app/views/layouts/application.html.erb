@@ -43,23 +43,21 @@
     </main>
     <footer>
       <div class="bg-gradient-to-r from-gray-600 to-gray-500 flex flex-wrap items-center justify-between mx-auto p-10 text-xl">
-        <% @store_contacts.each do |contact| %>
         <div class="text-lg px-8 py-4">
-            <p class="mb-5">Phone: <%= contact.phone %></h1>
-            <p class="mb-5">E-mail: <%= contact.email %></h1>
-            <p >Address: <%= contact.location %></h1>
+            <p class="mb-5">Phone: <%= @store_contact.phone %></h1>
+            <p class="mb-5">E-mail: <%= @store_contact.email %></h1>
+            <p >Address: <%= @store_contact.location %></h1>
         </div>
         <div class="text-lg px-8 py-4">
             <p>Open hours:</p>
-            <p class="">Mon: <%= contact.open_mon %></p>
-            <p class="">Tue: <%= contact.open_tue %></p>
-            <p class="">Wed: <%= contact.open_wed %></p>
-            <p class="">Thu: <%= contact.open_thu %></p>
-            <p class="">Fri: <%= contact.open_fri %></p>
-            <p class="">Sat: <%= contact.open_sat %></p>
-            <p class="">Sun: <%= contact.open_sun %></p>
+            <p class="">Mon: <%= @store_contact.open_mon %></p>
+            <p class="">Tue: <%= @store_contact.open_tue %></p>
+            <p class="">Wed: <%= @store_contact.open_wed %></p>
+            <p class="">Thu: <%= @store_contact.open_thu %></p>
+            <p class="">Fri: <%= @store_contact.open_fri %></p>
+            <p class="">Sat: <%= @store_contact.open_sat %></p>
+            <p class="">Sun: <%= @store_contact.open_sun %></p>
         </div>
-        <%end%>
       </div>
     </footer>
   </body>

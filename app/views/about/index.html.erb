@@ -7,4 +7,25 @@
         <p class="mb-5"><%= about.content %></p>
     </div>
     <%end%>
+
+    <h1 class="text-center text-3xl">Our Shops</h1>
+    <div class="flex flex-wrap items-center justify-between mx-auto p-10 text-xl">
+    <% @store_contacts.each do |contact| %>
+        <div class="text-lg px-8 py-4">
+            <p class="mb-5">Phone: <%= contact.phone %></h1>
+            <p class="mb-5">E-mail: <%= contact.email %></h1>
+            <p >Address: <%= contact.location %></h1>
+        </div>
+        <div class="text-lg px-8 py-4">
+            <p>Open hours:</p>
+            <p class="">Mon: <%= contact.open_mon %></p>
+            <p class="">Tue: <%= contact.open_tue %></p>
+            <p class="">Wed: <%= contact.open_wed %></p>
+            <p class="">Thu: <%= contact.open_thu %></p>
+            <p class="">Fri: <%= contact.open_fri %></p>
+            <p class="">Sat: <%= contact.open_sat %></p>
+            <p class="">Sun: <%= contact.open_sun %></p>
+        </div>
+    <%end%>
+    </div>
 </div>
