@@ -16,6 +16,20 @@
           <div>
             <h1>Winnipeg Best Camera</h1>
           </div>
+
+          <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
+            <div class="container flex justify-center items-center h-4">
+              <div class="text-black">
+                <%= text_field_tag(:keywords, nil, class: "input", placeholder: 'Search for product') %>
+              </div>
+              <div class="text-black">
+                <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
+              </div>
+              <div class="border border-gray-200 ml-2 bg-gray-500 px-2 py-1 rounded-md">
+                <%= submit_tag("Search", class: "button is-primary") %>
+              </div>
+            </div>
+          <% end %>
           
           <ul class="flex flex-row space-x-8 mr-2">
             <li class="hover:text-blue-400"><%= link_to 'Home', root_path %></li>

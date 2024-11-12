@@ -1,2 +1,19 @@
-<h1>Products#search</h1>
-<p>Find me in app/views/products/search.html.erb</p>
+<p class="mb-5">Searching result for: <span class="text-red-400"><%= params[:keywords] %></span></p>
+<div class="grid grid-cols-4 gap-4">
+<% @products.each do |product| %>
+<div class='border-2 border-black w-52 m-auto mb-5 p-4 rounded-md'>
+    <div class=''>
+        <% if product.image.present? %>
+          <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
+        <% end %>
+    </div>
+    <div class=''>
+        <p><%= product.brand.name %></p>
+        <h3><%= link_to product.name, product %></h3>
+    </div>
+</div>
+<%end%>
+</div>
+<div class="text-center text-2xl mt-10">
+  <%= paginate @products %>
+</div>
