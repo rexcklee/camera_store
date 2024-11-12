@@ -9,7 +9,23 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="text-white bg-gradient-to-r from-cyan-900 to-cyan-600">
+    <header>
+      <nav>
+        <div class="bg-gradient-to-r from-gray-700 to-gray-600 flex flex-wrap items-center justify-between mx-auto p-4 text-xl">
+          <div>
+            <h1>Winnipeg Best Camera</h1>
+          </div>
+          
+          <ul class="flex flex-row space-x-8 mr-2">
+            <li class="hover:text-blue-400"><%= link_to 'Home', root_path %></li>
+            <li class="hover:text-blue-400"><%= link_to 'Products', products_path %></li>
+            <li class="hover:text-blue-400"><%= link_to 'About', about_path %></li>
+          </ul>
+        </div>
+      </nav>
+      
+    </header>
     <main class="container mx-auto my-8 px-5 flex flex-col justify-center">
       <%= yield %>
     </main>
