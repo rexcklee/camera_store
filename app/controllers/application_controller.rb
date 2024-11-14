@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
 
   private
   def load_store_contact
-    @store_contact = StoreContact.first
+    @main_store_contact = StoreContact.first
   end
 end
