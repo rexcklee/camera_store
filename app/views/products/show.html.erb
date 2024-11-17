@@ -11,5 +11,15 @@
   <p class="mb-3">Model: <span class="text-red-400"><%= @product.name %></span></p>
   <p class="mb-3">Price: <span class="text-red-400"><%= number_to_currency (@product.price_cents/100) %></span></p>
   <p class="mb-3">Description: <span class="text-orange-300 hover:text-yellow-400"><%= @product.description %></span></p>
+  <% if cart.include?(@product)%>
+  <%= button_to cart_path(@product), method: :delete do%>
+    <p class='border-2 px-2 py-1 text-black bg-red-400 rounded-md'>Remove from Cart</p>
+    <% end%>
+    <% else %>
+  <%= form_with url: cart_index_path do %>
+    <%= hidden_field_tag(:id, @product.id)%>
+    <%= button_tag("Add to cart", class:'border-2 px-2 py-1 bg-green-600 rounded-md') %>
+  <% end %>
+  <%end%>
 </div>
 </div>
