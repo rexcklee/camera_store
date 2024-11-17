@@ -34,7 +34,7 @@
               </div>
             </div>
           <% end %>
-          <div class="border rounded-md px-2 py-1"> Cart(<%= cart.length()%>)</div>
+          <div class="border rounded-md px-2 py-1"> <%= link_to "Cart(#{cart.length()})", cart_index_path%></div>
         </div>
       </nav>      
     </header>

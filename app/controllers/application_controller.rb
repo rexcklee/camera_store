@@ -18,7 +18,8 @@ class ApplicationController < ActionController::Base
   end
 
   def cart
-    product_id = session[:cart]
-    Product.find(product_id)
+    cart_products_array = session[:cart]
+    product_ids_array = cart_products_array.map { |product| product["id"] }
+    Product.find(product_ids_array)
   end
 end

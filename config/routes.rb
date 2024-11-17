@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/products/search/", to: "products#search", as: "products_search"
 
   get "about" => "about#index", as: "about"
-  resources :cart, only: %i[create destroy]
+  resources :cart, only: %i[index create destroy]
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

@@ -1,0 +1,18 @@
+<div class="flex flex-col">
+<% cart.each do |product| %>
+<div class='border-2 border-black w-52 m-auto mb-5 p-4 rounded-md'>
+    <div class=''>
+        <% if product.image.present? %>
+          <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
+        <% end %>
+    </div>
+    <div class=''>
+        <p><%= product.brand.name %></p>
+        <h3><%= link_to product.name, product %></h3>
+    </div>
+    <% if item = session[:cart].find{ |cart_product| cart_product['id']== product.id}%>
+
+    <% end %>
+</div>
+<%end%>
+</div>
