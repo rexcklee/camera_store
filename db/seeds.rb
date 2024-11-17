@@ -1,7 +1,7 @@
 
-# if Rails.env.development?
-#   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
-# end
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end
 
 require 'net/http'
 require 'json'
@@ -64,5 +64,3 @@ lenses_data[0..99].each do |lense|
 
   end
 end
-
-# url = 'https://www.cined.com/content/uploads/cined-techlab-json-cached-data/techlab_request_lenses_PhotoPrimes.json'
