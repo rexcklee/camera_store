@@ -31,4 +31,6 @@ class CartController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
+  def checkout
+  end
 end
