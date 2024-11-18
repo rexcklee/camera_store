@@ -1,6 +1,6 @@
 <div class="flex flex-col">
 <% cart.each do |product| %>
-<div class='border-2 border-black w-2/3 m-auto mb-5 p-4 rounded-md flex justify-center items-center'>
+<div class='border-2 border-white w-2/3 m-auto mb-5 p-4 rounded-md flex justify-center items-center'>
     <div class='basis-1/3'>
         <% if product.image.present? %>
             <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
@@ -10,8 +10,7 @@
         <p><%= product.brand.name %></p>
         <h3><%= link_to product.name, product %></h3>
         <% if item = session[:cart].find{ |cart_product| cart_product['id']== product.id}%>
-            <p>ID: <%= item['id'] %></p>
-            <p>Qty: <%= item['qty'] %></p>
+            <p>Quantity: <%= item['qty'] %></p>
     </div>
     <div class='basis-1/3'>
             <%= form_with(url: cart_edit_path, method: :get, local: true) do |form| %>
