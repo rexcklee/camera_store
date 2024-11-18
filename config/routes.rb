@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   get "about" => "about#index", as: "about"
   resources :cart, only: %i[index create destroy]
+  get "cart/edit", to: "cart#edit", as: "cart_edit"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

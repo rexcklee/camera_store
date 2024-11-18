@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   def cart
     cart_products_array = session[:cart]
     product_ids_array = cart_products_array.map { |product| product["id"] }
-    Product.find(product_ids_array)
+    Product.order(:name).find(product_ids_array)
   end
 end

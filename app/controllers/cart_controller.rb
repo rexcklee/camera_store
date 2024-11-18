@@ -21,4 +21,14 @@ class CartController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
+
+  def edit
+    product_id = params[:id].to_i
+    updated_quantity = params[:quantity]
+    if (edit_product = session[:cart].find { |product| product["id"]==product_id })
+      session[:cart].delete(edit_product)
+      session[:cart] << { "id": product_id, "qty": updated_quantity }
+    end
+    redirect_back(fallback_location: root_path)
+  end
 end
