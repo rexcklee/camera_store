@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
 
   def initialize_session
     session[:cart] ||= []
+    session[:address] ||= "Please provide a shipping address"
+    session[:province] ||= nil
   end
 
   def cart

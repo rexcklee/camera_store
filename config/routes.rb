@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   resources :cart, only: %i[index create destroy]
   get "cart/edit", to: "cart#edit", as: "cart_edit"
   get "cart/checkout", to: "cart#checkout", as: "cart_checkout"
+  get "cart/shipping_address", to: "cart#shipping_address", as: "cart_shipping_address"
+  get "cart/order", to: "cart#order", as: "cart_order"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
