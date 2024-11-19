@@ -12,7 +12,7 @@
   <body class="text-white bg-gradient-to-r from-cyan-900 to-cyan-600 h-screen flex flex-col justify-between">
     <header>
       <nav>
-        <div class="bg-gradient-to-r from-gray-700 to-gray-600 flex flex-wrap items-center justify-between mx-auto p-4 text-xl">
+        <div class="bg-gradient-to-r from-gray-700 to-gray-600 flex flex-wrap items-center justify-between mx-auto p-4 text-lg">
           <div>
             <h1>Winnipeg Best Camera</h1>
           </div>
@@ -34,8 +34,11 @@
               </div>
             </div>
           <% end %>
+          <% if current_customer != nil %>
+              <p><%= current_customer.id %></p>
+          <% end %>
           <%= link_to 'Sign in', new_customer_session_path %>
-          <%= button_to("Log Out",destroy_customer_session_path,method: :delete) %>
+          <%= button_to("Sign out",destroy_customer_session_path,method: :delete) %>
           <div class="border rounded-md px-2 py-1"> <%= link_to "Cart(#{cart.length()})", cart_index_path%></div>
         </div>
       </nav>      
