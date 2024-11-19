@@ -72,3 +72,5 @@ gem "faker", "~> 3.5.1"
 gem "tailwindcss-rails", "~> 3.0"
 
 gem "kaminari"
+
+gem "rails_icons"

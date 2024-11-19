@@ -13,33 +13,43 @@
     <header>
       <nav>
         <div class="bg-gradient-to-r from-gray-700 to-gray-600 flex flex-wrap items-center justify-between mx-auto p-4 text-lg">
-          <div>
-            <h1>Winnipeg Best Camera</h1>
+          <div class="basis-1/12">
+            <h1>Best Camera</h1>
           </div>
-          <ul class="flex flex-row space-x-8 mr-2">
-            <li class="hover:text-blue-400"><%= link_to 'Home', root_path %></li>
-            <li class="hover:text-blue-400"><%= link_to 'Products', products_path %></li>
-            <li class="hover:text-blue-400"><%= link_to 'About', about_path %></li>
-          </ul>
-          <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
-            <div class="container flex justify-center items-center h-4">
-              <div class="text-black">
-                <%= text_field_tag(:keywords, nil, class: "input", placeholder: 'Search for product') %>
+          <div class="basis-2/12">
+            <ul class="flex flex-row space-x-8 mr-2">
+              <li class="hover:text-blue-400"><%= link_to 'Home', root_path %></li>
+              <li class="hover:text-blue-400"><%= link_to 'Products', products_path %></li>
+              <li class="hover:text-blue-400"><%= link_to 'About', about_path %></li>
+            </ul>
+          </div>
+          <div class="basis-1/6">
+            <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
+              <div class="container flex justify-center items-center h-4">
+                <div class="text-black">
+                  <%= text_field_tag(:keywords, nil, class: "input w-36", placeholder: 'Search product') %>
+                </div>
+                <div class="text-black">
+                  <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
+                </div>
+                <div class="border border-gray-200 ml-2 bg-gray-500 px-2 py-1 rounded-md">
+                  <%= submit_tag("Search", class: "button is-primary") %>
+                </div>
               </div>
-              <div class="text-black">
-                <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
-              </div>
-              <div class="border border-gray-200 ml-2 bg-gray-500 px-2 py-1 rounded-md">
-                <%= submit_tag("Search", class: "button is-primary") %>
-              </div>
-            </div>
-          <% end %>
-          <% if current_customer != nil %>
-              <p><%= link_to current_customer.id, customer_info_edit_path(:id => current_customer.id) %></p>
-          <% end %>
-          <%= link_to 'Sign in', new_customer_session_path %>
-          <%= button_to("Sign out",destroy_customer_session_path,method: :delete) %>
-          <div class="border rounded-md px-2 py-1"> <%= link_to "Cart(#{cart.length()})", cart_index_path%></div>
+            <% end %>
+          </div>
+          <div class="basis-2/12 flex justify-between items-center">
+            <% if current_customer != nil %>
+                <p>Hello, <%= current_customer.name %></p>
+                <p><%= link_to icon("user-circle", class:"w-6 h-6"), customer_info_edit_path(:id => current_customer.id) %></p>
+                <%= button_to("Logout",destroy_customer_session_path,method: :delete, class:"border rounded-md px-2 py-1") %>
+            <% else %>
+                <%= link_to 'Login', new_customer_session_path, class:"border rounded-md px-2 py-1" %>
+            <% end %>
+          </div>
+          <div class="basis-1/12">
+            <div class="border rounded-md px-2 py-1 text-center"> <%= link_to "Cart(#{cart.length()})", cart_index_path%></div>
+          </div>
         </div>
       </nav>      
     </header>
