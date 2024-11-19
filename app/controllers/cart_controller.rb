@@ -9,7 +9,6 @@ class CartController < ApplicationController
       session[:cart] << { "id": product_id, "qty": 1 }
       flash[:notice] = "Item added."
     end
-    logger.debug("Cart session: #{session[:cart]}")
     redirect_back(fallback_location: root_path)
   end
 
@@ -68,20 +67,13 @@ class CartController < ApplicationController
     province = session[:province]
     total_cents = params[:total_cents]
     @order_number = generate_unique_order_number
-    logger.debug("GGGAddr, Prov, Total: #{@order_number},#{address},#{province},#{total_cents}")
     order = Order.create(number: @order_number, address: address, province: province, total_cents: total_cents)
     cart.each do |product|
       if item = session[:cart].find { |cart_product| cart_product["id"]== product.id }
         OrderProduct.create(order: order, product: product, quantity: item["qty"], unit_price_cents: product.price_cents)
-        logger.debug("Product: #{item["qty"]},#{product.name},#{product.id}")
       end
     end
     session[:cart] = []
-    # if @order.save
-    #   redirect_back(fallback_location: root_path)
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
   end
 
   private

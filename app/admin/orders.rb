@@ -1,9 +1,6 @@
 ActiveAdmin.register Order do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  # Uncomment all parameters which should be permitted for assignment
-  #
+  menu priority: 8
+
   permit_params :number, :address, :status, :province, :total_cents, order_product_ids: []
 
   index do
@@ -14,6 +11,8 @@ ActiveAdmin.register Order do
     column :status
     column :province
     column :total_cents
+    column :created_at
+    column :updated_at
 
     column "Products" do |order|
       table_for order.order_products do
@@ -24,15 +23,7 @@ ActiveAdmin.register Order do
         column :unit_price_cents
       end
     end
+
     actions
   end
-
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:number, :address, :status, :province, :total_cents]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
 end

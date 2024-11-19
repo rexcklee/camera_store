@@ -23,7 +23,6 @@ ActiveAdmin.register Product do
     column :created_at
     column :updated_at
     column "Image" do |product|
-      # customer.image.present? ? customer.image.filename : ""
       product.image.present? ? image_tag(product.image, style: "height:100px") : ""
     end
     actions
