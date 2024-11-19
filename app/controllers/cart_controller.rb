@@ -67,16 +67,26 @@ class CartController < ApplicationController
     address = session[:address]
     province = session[:province]
     total_cents = params[:total_cents]
-    logger.debug("GGGAddr, Prov, Total: #{address},#{province},#{total_cents}")
-    # @order = Order.new(address: address, province: province, total_cents: total_cents)
-
+    logger.debug("GGGAddr, Prov, Total: #{generate_unique_order_number},#{address},#{province},#{total_cents}")
+    order = Order.create(number: generate_unique_order_number, address: address, province: province, total_cents: total_cents)
+    cart.each do |product|
+      if item = session[:cart].find { |cart_product| cart_product["id"]== product.id }
+        OrderProduct.create(order: order, product: product, quantity: item["qty"], unit_price_cents: product.price_cents)
+        logger.debug("Product: #{item["qty"]},#{product.name},#{product.id}")
+      end
+    end
     # if @order.save
     #   redirect_back(fallback_location: root_path)
     # else
     #   render :new, status: :unprocessable_entity
     # end
-    cart.each do |product|
-      logger.debug("Product: #{product.name},#{product.id}")
-    end
+  end
+
+  private
+  def generate_unique_order_number
+    begin
+    order_number = 9.times.map { [ *0..9 ].sample }.join.to_i
+    end while Order.find_by(number: order_number)
+    order_number
   end
 end
