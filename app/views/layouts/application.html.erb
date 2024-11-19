@@ -34,6 +34,8 @@
               </div>
             </div>
           <% end %>
+          <%= link_to 'Sign in', new_customer_session_path %>
+          <%= button_to("Log Out",destroy_customer_session_path,method: :delete) %>
           <div class="border rounded-md px-2 py-1"> <%= link_to "Cart(#{cart.length()})", cart_index_path%></div>
         </div>
       </nav>      

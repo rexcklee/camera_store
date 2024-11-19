@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :customers
   get "categories/index"
   get "/categories/:id", to: "categories#show", as: "category", constraints: { id: /\d+/ }
   # get "categories/show"
