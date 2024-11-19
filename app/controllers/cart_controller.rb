@@ -64,15 +64,19 @@ class CartController < ApplicationController
   end
 
   def order
-    address = params[:address]
-    province = params[:province]
+    address = session[:address]
+    province = session[:province]
     total_cents = params[:total_cents]
-    @order = Order.new(address: address, province: province, total_cents: total_cents)
+    logger.debug("GGGAddr, Prov, Total: #{address},#{province},#{total_cents}")
+    # @order = Order.new(address: address, province: province, total_cents: total_cents)
 
-    if @order.save
-      redirect_back(fallback_location: root_path)
-    else
-      render :new, status: :unprocessable_entity
+    # if @order.save
+    #   redirect_back(fallback_location: root_path)
+    # else
+    #   render :new, status: :unprocessable_entity
+    # end
+    cart.each do |product|
+      logger.debug("Product: #{product.name},#{product.id}")
     end
   end
 end
