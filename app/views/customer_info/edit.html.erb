@@ -1,17 +1,21 @@
-<%= form_with(url: customer_info_save_path) do |form| %>
-    <div class="text-black">
-      <%= form.label :name %><br>
-      <p><%= @customer_info.name %> </p>
-      <%= text_field_tag(:name, @customer_info.name, class: "input", placeholder: "Name") %>
-    </div>
-  
-    <div class="text-black">
-      <%= form.label :address %><br>
-      <%= text_field_tag(:address, @customer_info.address, class: "input", placeholder: "Address") %>
-      <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %>
-    </div>
-    
-    <div>
-      <%= submit_tag("Update", class: "border rounded-md bg-green-600 text-center p-2 mb-3") %>
-    </div>
-  <% end %>
+<div class="flex flex-col text-xl text-black justify-center items-center">
+  <h1 class="text-2xl text-white mb-10">User Information</h1>
+  <div class="">
+    <%= form_with(url: customer_info_save_path) do |form| %>
+        <div class="text-black mb-5">
+          <%= form.label :name %><br>
+          <%= text_field_tag(:name, @customer_info.name, class: "input w-full", placeholder: "Name") %>
+        </div>
+
+        <div class="text-black mb-5">
+          <%= form.label :address %><br>
+          <%= text_field_tag(:address, @customer_info.address, class: "input", placeholder: "Address") %>
+          <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %>
+        </div>
+
+        <div class="text-center">
+          <%= submit_tag("Update", class: "border rounded-md bg-green-600 text-center w-full py-2 mb-3") %>
+        </div>
+    <% end %>
+  </div>
+</div>
