@@ -1,0 +1,17 @@
+<%= form_with(url: customer_info_save_path) do |form| %>
+    <div class="text-black">
+      <%= form.label :name %><br>
+      <p><%= @customer_info.name %> </p>
+      <%= text_field_tag(:name, @customer_info.name, class: "input", placeholder: "Name") %>
+    </div>
+  
+    <div class="text-black">
+      <%= form.label :address %><br>
+      <%= text_field_tag(:address, @customer_info.address, class: "input", placeholder: "Address") %>
+      <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %>
+    </div>
+    <%= hidden_field_tag(:id, @customer_info.id)%>
+    <div>
+      <%= form.submit %>
+    </div>
+  <% end %>

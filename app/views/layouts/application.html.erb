@@ -35,7 +35,7 @@
             </div>
           <% end %>
           <% if current_customer != nil %>
-              <p><%= current_customer.id %></p>
+              <p><%= link_to current_customer.id, customer_info_edit_path(:id => current_customer.id) %></p>
           <% end %>
           <%= link_to 'Sign in', new_customer_session_path %>
           <%= button_to("Sign out",destroy_customer_session_path,method: :delete) %>

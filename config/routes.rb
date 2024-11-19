@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "customer_info/index"
+  get "customer_info/edit", to: "customer_info#edit", as: "customer_info_edit"
+  post "customer_info/save", to: "customer_info#save", as: "customer_info_save"
   devise_for :customers
   get "categories/index"
   get "/categories/:id", to: "categories#show", as: "category", constraints: { id: /\d+/ }
