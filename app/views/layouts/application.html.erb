@@ -42,13 +42,13 @@
             <% if current_customer != nil %>
                 <p>Hello, <%= current_customer.name %></p>
                 <p><%= link_to icon("user-circle", class:"w-6 h-6"), customer_info_edit_path(:id => current_customer.id) %></p>
-                <%= button_to("Logout",destroy_customer_session_path, method: :delete, class:"border rounded-md px-2 py-1") %>
+                <%= button_to("Logout",destroy_customer_session_path, method: :delete, class:"border rounded-md px-2 py-1 hover:bg-gray-700") %>
             <% else %>
-                <%= link_to 'Login', new_customer_session_path, class:"border rounded-md px-2 py-1" %>
+                <%= link_to 'Login', new_customer_session_path, class:"border rounded-md px-2 py-1 hover:bg-gray-700" %>
             <% end %>
           </div>
           <div class="basis-1/12">
-            <div class="border rounded-md px-2 py-1 text-center"> <%= link_to "Cart(#{cart.length()})", cart_index_path%></div>
+            <div class="text-center"> <%= link_to "Cart(#{cart.length()})", cart_index_path, class:"border rounded-md px-3 py-2 hover:bg-gray-700" %></div>
           </div>
         </div>
       </nav>      
@@ -56,25 +56,7 @@
     <main class="container mx-auto my-8 px-5 flex flex-col justify-center">
       <%= yield %>
     </main>
-    <footer>
-      <div class="bg-gradient-to-r from-gray-600 to-gray-500 flex flex-wrap items-center justify-between mx-auto p-10 text-xl">
-        <div class="text-lg px-8 py-4">
-            <p class="mb-5">Phone: <%= @main_store_contact.phone %></h1>
-            <p class="mb-5">E-mail: <%= @main_store_contact.email %></h1>
-            <p >Address: <%= @main_store_contact.location %></h1>
-        </div>
-        <div class="text-lg px-8 py-4">
-            <p>Open hours:</p>
-            <p class="">Mon: <%= @main_store_contact.open_mon %></p>
-            <p class="">Tue: <%= @main_store_contact.open_tue %></p>
-            <p class="">Wed: <%= @main_store_contact.open_wed %></p>
-            <p class="">Thu: <%= @main_store_contact.open_thu %></p>
-            <p class="">Fri: <%= @main_store_contact.open_fri %></p>
-            <p class="">Sat: <%= @main_store_contact.open_sat %></p>
-            <p class="">Sun: <%= @main_store_contact.open_sun %></p>
-        </div>
-      </div>
-    </footer>
+    <%= render "/layouts/footer" %>
   </body>
   
 </html>
