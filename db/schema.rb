@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_063116) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_153330) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -117,10 +117,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_063116) do
     t.datetime "updated_at", null: false
     t.string "address"
     t.integer "status", default: 0
-    t.integer "province", default: 0
     t.integer "total_cents"
     t.integer "customer_id"
+    t.integer "province_id", null: false
+    t.decimal "total_tax_rate", precision: 5, scale: 3
     t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["province_id"], name: "index_orders_on_province_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -167,6 +169,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_063116) do
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "provinces"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
 end

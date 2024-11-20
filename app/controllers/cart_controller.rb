@@ -96,12 +96,17 @@ class CartController < ApplicationController
 
   def order
     address = session[:address]
-    province = session[:province]
+    province = session[:province]["id"]
     total_cents = params[:total_cents]
+    total_tax_rate = params[:total_tax_rate]
     @order_number = generate_unique_order_number
     customer = current_customer || Customer.find_or_create_by(email: "guest@guest.com")
-    order = Order.create(number: @order_number, customer: customer, address: address, province: province, total_cents: total_cents)
-    logger.debug("Without customer: #{customer.name} #{order.id}")
+
+    logger.debug("number: #{@order_number}, customer: #{customer}, address: #{address}, province_id: #{province}, total_cents: #{total_cents}, total_tax_rate: #{total_tax_rate}")
+
+
+    order = Order.create(number: @order_number, customer: customer, address: address, province_id: province, total_cents: total_cents, total_tax_rate: total_tax_rate)
+
 
     cart.each do |product|
       if item = session[:cart].find { |cart_product| cart_product["id"]== product.id }
@@ -109,7 +114,7 @@ class CartController < ApplicationController
       end
     end
     session[:cart] = []
-    session[:address] = "Please provide a shipping address"
+    session[:address] = nil
     session[:province] = nil
   end
 

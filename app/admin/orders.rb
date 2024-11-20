@@ -1,7 +1,7 @@
 ActiveAdmin.register Order do
   menu priority: 8
 
-  permit_params :number, :address, :status, :province, :total_cents, :customer_id, order_product_ids: []
+  permit_params :number, :address, :status, :province_id, :total_cents, :total_tax_rate, :customer_id, order_product_ids: []
 
   index do
     selectable_column
@@ -14,6 +14,9 @@ ActiveAdmin.register Order do
     column "Total" do |order|
       number_to_currency order.total_cents/100.0
     end
+    column "Total(with Tax)" do |order|
+      number_to_currency order.total_cents*(1+order.total_tax_rate)/100.0
+    end
     column :created_at
     column :updated_at
 
@@ -23,7 +26,10 @@ ActiveAdmin.register Order do
           link_to order_product.product.name, [ :admin, order_product ]
         end
         column :quantity
-        column :unit_price_cents
+        column "Unit Price" do |order_product|
+          number_to_currency order_product.unit_price_cents/100.0
+        end
+        # column :unit_price_cents
       end
     end
 
