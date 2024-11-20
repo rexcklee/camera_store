@@ -6,6 +6,7 @@ class CustomerInfoController < ApplicationController
   def edit
     # @customer_info = Customer.find(params[:id].to_i)
     @customer_info = Customer.find(current_customer.id)
+    @orders_history = Customer.find(current_customer.id).orders.all
   end
 
   def save

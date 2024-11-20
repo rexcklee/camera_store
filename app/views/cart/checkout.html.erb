@@ -63,6 +63,7 @@
             <% end %>
         </div>
         <% end %>
+        <% if province = session[:province] %>
         <div class="w-full text-center">
             <%= form_with(url: cart_order_path, method: :get, local: true) do |form| %>
             <%= hidden_field_tag(:total_cents, @total_cents)%>
@@ -72,5 +73,6 @@
                 </div>
             <% end %>
         </div>
+        <% end %>
     </div>
 </div>
