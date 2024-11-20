@@ -18,7 +18,9 @@ ActiveAdmin.register Product do
     column :category
     column :brand
     column :description
-    column :price_cents
+    column "Price" do |product|
+      number_to_currency product.price_cents/100
+    end
     column :stock_quantity
     column :created_at
     column :updated_at

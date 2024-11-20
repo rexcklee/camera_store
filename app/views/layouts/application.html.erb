@@ -42,7 +42,7 @@
             <% if current_customer != nil %>
                 <p>Hello, <%= current_customer.name %></p>
                 <p><%= link_to icon("user-circle", class:"w-6 h-6"), customer_info_edit_path(:id => current_customer.id) %></p>
-                <%= button_to("Logout",destroy_customer_session_path,method: :delete, class:"border rounded-md px-2 py-1") %>
+                <%= button_to("Logout",destroy_customer_session_path, method: :delete, class:"border rounded-md px-2 py-1") %>
             <% else %>
                 <%= link_to 'Login', new_customer_session_path, class:"border rounded-md px-2 py-1" %>
             <% end %>

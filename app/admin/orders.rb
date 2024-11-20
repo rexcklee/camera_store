@@ -7,11 +7,13 @@ ActiveAdmin.register Order do
     selectable_column
     id_column
     column :number
-    column :customer_id
+    column :customer
     column :address
     column :status
     column :province
-    column :total_cents
+    column "Total" do |order|
+      number_to_currency order.total_cents/100
+    end
     column :created_at
     column :updated_at
 
