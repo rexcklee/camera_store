@@ -67,7 +67,7 @@ class CartController < ApplicationController
     province = session[:province]
     total_cents = params[:total_cents]
     @order_number = generate_unique_order_number
-    order = Order.create(number: @order_number, address: address, province: province, total_cents: total_cents)
+    order = Order.create(number: @order_number, customer: current_customer, address: address, province: province, total_cents: total_cents)
     cart.each do |product|
       if item = session[:cart].find { |cart_product| cart_product["id"]== product.id }
         OrderProduct.create(order: order, product: product, quantity: item["qty"], unit_price_cents: product.price_cents)
