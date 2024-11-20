@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_19_174719) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_035618) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -118,6 +118,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_174719) do
     t.integer "status", default: 0
     t.integer "province", default: 0
     t.integer "total_cents"
+    t.integer "customer_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -152,6 +154,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_19_174719) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
+  add_foreign_key "orders", "customers"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
 end

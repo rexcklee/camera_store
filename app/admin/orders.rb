@@ -1,12 +1,13 @@
 ActiveAdmin.register Order do
   menu priority: 8
 
-  permit_params :number, :address, :status, :province, :total_cents, order_product_ids: []
+  permit_params :number, :address, :status, :province, :total_cents, :customer_id, order_product_ids: []
 
   index do
     selectable_column
     id_column
     column :number
+    column :customer_id
     column :address
     column :status
     column :province
