@@ -27,17 +27,11 @@
         <h1 class="mb-2">Payment information</h1>
         <div class="border-2 border-white w-full m-auto mb-5 p-4 rounded-md flex flex-col items-start">
             
-            <% if session[:address] == "Please provide a shipping address" && current_customer != nil %>
-                <% if current_customer.address != nil %>
-                    <% session[:address] = current_customer.address %>
-                    <% session[:province] = current_customer.province %>
-                <% end %>
-            <% end %>
             <% if shipping_address = session[:address] %>
                 <p>Address: <span class="text-red-400"><%= shipping_address %></span></p>
             <% end %>
             <% if province = session[:province] %>
-                <p>Province: <span class="text-red-400"><%= province %></span></p>
+                <p>Province: <span class="text-red-400"><%= province["name"] %></span></p>
             <% end %>
             <% if @gst !=0 %>
                 <p>GST: <span class="text-red-400"><%= number_to_currency (@total_cents/100*@gst) %></span></p>
@@ -52,13 +46,14 @@
             <p>Estimated Tax: <span class="text-red-400"><%= number_to_currency (@total_cents/100*(@gst+@pst+@hst)) %></span></p>
             <p>Order Total: <span class="text-red-400"><%= number_to_currency (@total_cents/100*(1+@gst+@pst+@hst)) %></span></p>
         </div>
+        <% if !current_customer.present? || !current_customer.province.present? %>
         <div>
             <%= form_with(url: cart_shipping_address_path, method: :get, local: true) do |form| %>
             <%= hidden_field_tag(:total_cents, @total_cents)%>
             <div class="flex justify-center items-center mb-2">
                 <div class="text-black">
                     <%= text_field_tag(:address, nil, class: "input", placeholder: 'Shipping Address') %>
-                    <%= form.select :province, Order.provinces.keys %>
+                    <%= form.select :province, options_for_select(Province.all.map {|province| [province.name, province.id]}) %>
                 </div>
                 <div class="border border-gray-200 ml-2 bg-green-700 rounded-md p-2">
                     <%= submit_tag("Update", class: "button is-primary") %>
@@ -66,6 +61,7 @@
             </div>
             <% end %>
         </div>
+        <% end %>
         <div class="w-full text-center">
             <%= form_with(url: cart_order_path, method: :get, local: true) do |form| %>
             <%= hidden_field_tag(:total_cents, @total_cents)%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_035618) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_20_063116) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -94,8 +94,9 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_035618) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "address"
-    t.integer "province"
+    t.integer "province_id"
     t.index ["email"], name: "index_customers_on_email", unique: true
+    t.index ["province_id"], name: "index_customers_on_province_id"
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
   end
 
@@ -135,6 +136,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_035618) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "provinces", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "pst", precision: 5, scale: 3
+    t.decimal "gst", precision: 5, scale: 3
+    t.decimal "hst", precision: 5, scale: 3
+  end
+
   create_table "store_contacts", force: :cascade do |t|
     t.string "location"
     t.string "phone"
@@ -152,6 +163,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_035618) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "customers", "provinces"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "customers"

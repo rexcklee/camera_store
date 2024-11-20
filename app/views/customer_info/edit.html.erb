@@ -10,7 +10,8 @@
         <div class="text-black mb-5">
           <%= form.label :address %><br>
           <%= text_field_tag(:address, @customer_info.address, class: "input", placeholder: "Address") %>
-          <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %>
+          <%# <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %> 
+          <%= form.select :province, options_for_select(Province.all.map {|province| [province.name, province.id]}, @customer_info.province&.id) %>
         </div>
 
         <div class="text-center">

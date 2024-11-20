@@ -12,7 +12,7 @@ class CustomerInfoController < ApplicationController
     logger.debug("Address is: #{params[:address]}, Name is: #{params[:name]}, Province is: #{params[:province]}")
     # edit_customer = Customer.find(params[:id].to_i)
     edit_customer = Customer.find(current_customer.id)
-    edit_customer.update(name: params[:name], address: params[:address], province: params[:province])
+    edit_customer.update(name: params[:name], address: params[:address], province_id: params[:province])
     # @customer_info.update(name: params[:name])
     # @customer_info.name = params[:name]
     # @customer_info.address = params[:address]

@@ -6,5 +6,7 @@ class Customer < ApplicationRecord
 
   has_many :orders
 
-  enum :province, [ :AB, :BC, :MB, :NB, :NL, :NT, :NS, :NU, :ON, :PE, :QC, :SK, :YT ]
+  belongs_to :province, optional: true
+
+  # enum :province, [ :AB, :BC, :MB, :NB, :NL, :NT, :NS, :NU, :ON, :PE, :QC, :SK, :YT ]
 end

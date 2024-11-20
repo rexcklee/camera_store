@@ -12,7 +12,7 @@ ActiveAdmin.register Order do
     column :status
     column :province
     column "Total" do |order|
-      number_to_currency order.total_cents/100
+      number_to_currency order.total_cents/100.0
     end
     column :created_at
     column :updated_at

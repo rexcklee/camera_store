@@ -31,34 +31,66 @@ class CartController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
   def checkout
-    tax_rate = {
-                  AB: [ 0, 0.05, 0 ],
-                  BC: [ 0.07, 0.05, 0 ],
-                  MB: [ 0.07, 0.05, 0 ],
-                  NB: [ 0, 0, 0.15 ],
-                  NL: [ 0, 0, 0.15 ],
-                  NT: [ 0, 0.05, 0 ],
-                  NS: [ 0, 0, 0.15 ],
-                  NU: [ 0, 0.05, 0 ],
-                  ON: [ 0, 0, 0.13 ],
-                  PE: [ 0, 0, 0.15 ],
-                  QC: [ 0.09975, 0.05, 0 ],
-                  SK: [ 0.06, 0.05, 0 ],
-                  YT: [ 0, 0.05, 0 ]
-               }
-    @gst = 0
-    @pst = 0
-    @hst = 0
-    if session[:province].present?
-      @gst = tax_rate[session[:province].to_sym][0]
-      @pst = tax_rate[session[:province].to_sym][1]
-      @hst = tax_rate[session[:province].to_sym][2]
+    if current_customer.present?
+      address = current_customer.address
+      session[:address] = address
     end
+    if current_customer.present?
+      if current_customer.province.present?
+        province = current_customer.province
+        session[:province] = province
+        @gst = province.gst/100.0
+        @pst = province.pst/100.0
+        @hst = province.hst/100.0
+      end
+    end
+    # if session[:province].present?
+    #   logger.debug("Province session is: #{session[:province]}")
+    #   province = session[:province]
+    #   @gst = province["gst"].to_f/100.0
+    #   @pst = province["pst"].to_f/100.0
+    #   @hst = province["hst"].to_f/100.0
+    if session[:province].present?
+      province = session[:province]
+      @gst = province["gst"].to_f/100.0
+      @pst = province["pst"].to_f/100.0
+      @hst = province["hst"].to_f/100.0
+    else
+      @gst = 0.0
+      @pst = 0.0
+      @hst = 0.0
+    end
+    # tax_rate = {
+    #               AB: [ 0, 0.05, 0 ],
+    #               BC: [ 0.07, 0.05, 0 ],
+    #               MB: [ 0.07, 0.05, 0 ],
+    #               NB: [ 0, 0, 0.15 ],
+    #               NL: [ 0, 0, 0.15 ],
+    #               NT: [ 0, 0.05, 0 ],
+    #               NS: [ 0, 0, 0.15 ],
+    #               NU: [ 0, 0.05, 0 ],
+    #               ON: [ 0, 0, 0.13 ],
+    #               PE: [ 0, 0, 0.15 ],
+    #               QC: [ 0.09975, 0.05, 0 ],
+    #               SK: [ 0.06, 0.05, 0 ],
+    #               YT: [ 0, 0.05, 0 ]
+    #            }
+    # @gst = 0
+    # @pst = 0
+    # @hst = 0
+    # if session[:province].present?
+    #   @gst = tax_rate[session[:province].to_sym][0]
+    #   @pst = tax_rate[session[:province].to_sym][1]
+    #   @hst = tax_rate[session[:province].to_sym][2]
+    # end
   end
 
   def shipping_address
     session[:address] = params[:address]
-    session[:province] = params[:province]
+    province = Province.find(params[:province].to_i)
+    session[:province] = province
+
+    logger.debug("Session provin is: #{session[:province]}")
     redirect_back(fallback_location: root_path)
   end
 
