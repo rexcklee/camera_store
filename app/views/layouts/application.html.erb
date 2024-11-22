@@ -23,7 +23,7 @@
               <li class="hover:text-blue-400"><%= link_to 'About', about_path %></li>
             </ul>
           </div>
-          <div class="basis-1/6">
+          <div class="basis-3/12">
             <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
               <div class="container flex justify-center items-center h-4">
                 <div class="text-black">
@@ -32,7 +32,7 @@
                 <div class="text-black">
                   <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
                 </div>
-                <div class="border border-gray-200 ml-2 bg-gray-500 px-2 py-1 rounded-md">
+                <div class="border border-gray-200 ml-1 bg-gray-500 px-2 py-1 rounded-md">
                   <%= submit_tag("Search", class: "button is-primary") %>
                 </div>
               </div>
@@ -40,11 +40,11 @@
           </div>
           <div class="basis-2/12 flex justify-between items-center">
             <% if current_customer != nil %>
-                <p>Hello, <%= current_customer.name %></p>
-                <p><%= link_to icon("user-circle", class:"w-6 h-6"), customer_info_edit_path(:id => current_customer.id) %></p>
+                <p>Hi, <%= current_customer.name %></p>
+                <p><%= link_to icon("user-circle", class:"w-8 h-8"), customer_info_edit_path(:id => current_customer.id) %></p>
                 <%= button_to("Logout",destroy_customer_session_path, method: :delete, class:"border rounded-md px-2 py-1 hover:bg-gray-700") %>
             <% else %>
-                <%= link_to 'Login', new_customer_session_path, class:"border rounded-md px-2 py-1 hover:bg-gray-700" %>
+                <%= link_to 'Login', new_customer_session_path, class:"m-auto border rounded-md px-2 py-1 hover:bg-gray-700" %>
             <% end %>
           </div>
           <div class="basis-1/12">
