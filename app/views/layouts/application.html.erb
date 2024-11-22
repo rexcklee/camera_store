@@ -14,7 +14,7 @@
       <nav>
         <div class="bg-gradient-to-r from-gray-700 to-gray-600 flex flex-wrap items-center justify-between mx-auto p-4 text-lg">
           <div class="basis-1/12">
-            <h1>Best Camera</h1>
+            <h1><%= link_to 'Best Camera', root_path %></h1>
           </div>
           <div class="basis-2/12">
             <ul class="flex flex-row space-x-8 mr-2">
@@ -32,7 +32,7 @@
                 <div class="text-black">
                   <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
                 </div>
-                <div class="border border-gray-200 ml-1 bg-gray-500 px-2 py-1 rounded-md">
+                <div class="border border-gray-200 ml-1 bg-gray-500 px-2 py-1 rounded-md hover:bg-gray-700">
                   <%= submit_tag("Search", class: "button is-primary") %>
                 </div>
               </div>
