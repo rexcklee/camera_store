@@ -15,7 +15,7 @@ ActiveAdmin.register Order do
       number_to_currency order.total_cents/100.0
     end
     column "Total(with Tax)" do |order|
-      number_to_currency order.total_cents*(1+order.total_tax_rate)/100.0
+      number_to_currency (order.total_cents*(1+order.total_tax_rate)).to_i/100.0
     end
     column :created_at
     column :updated_at

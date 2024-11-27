@@ -4,6 +4,5 @@ class Order < ApplicationRecord
   belongs_to :customer
   belongs_to :province
 
-  enum :status, [ :pending, :completed ]
-  # enum :province, [ :AB, :BC, :MB, :NB, :NL, :NT, :NS, :NU, :ON, :PE, :QC, :SK, :YT ]
+  enum :status, [ :pending, :paid, :shipped ]
 end
