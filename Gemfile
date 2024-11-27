@@ -74,3 +74,5 @@ gem "tailwindcss-rails", "~> 3.0"
 gem "kaminari"
 
 gem "rails_icons"
+
+gem "stripe"
