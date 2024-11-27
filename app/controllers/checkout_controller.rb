@@ -25,19 +25,28 @@ class CheckoutController < ApplicationController
     end
 
     # Establish connection with Stripe
-    session = Stripe::Checkout::Session.create(
+    @session = Stripe::Checkout::Session.create(
       payment_method_types: [ "card" ],
-      success_url: "#{checkout_success_url}?order_id=#{order.id}",
+      success_url: checkout_success_url,
       cancel_url: checkout_cancel_url,
       mode: "payment",
       line_items: line_items
     )
-
-    redirect_to session.url, allow_other_host: true
+    session[:stripe_session_id] = @session.id
+    session[:order_id] = order.id
+    redirect_to @session.url, allow_other_host: true
   end
 
   def success
-    order_id = params[:order_id]
+    checkout = session[:stripe_session_id]
+    order_id = session[:order_id]
+    session[:stripe_session_id] = nil
+    session[:order_id] = nil
+
+    session = Stripe::Checkout::Session.retrieve(checkout)
+    payment_id = session.payment_intent
+
+    logger.debug("Checkout No: #{checkout}, Payment_id:#{payment_id}")
     order = Order.find(order_id)
     order.update(status: 1)
   end
