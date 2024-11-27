@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   get "cart/shipping_address", to: "cart#shipping_address", as: "cart_shipping_address"
   get "cart/confirm_order", to: "cart#confirm_order", as: "cart_confirm_order"
 
+  scope "/checkout" do
+    post "create", to: "checkout#create", as: "checkout_create"
+    get "success", to: "checkout#success", as: "checkout_success"
+    get "cancel", to: "checkout#cancel", as: "checkout_cancel"
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
