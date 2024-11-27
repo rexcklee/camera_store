@@ -44,12 +44,7 @@ class CartController < ApplicationController
         @hst = province.hst/100.0
       end
     end
-    # if session[:province].present?
-    #   logger.debug("Province session is: #{session[:province]}")
-    #   province = session[:province]
-    #   @gst = province["gst"].to_f/100.0
-    #   @pst = province["pst"].to_f/100.0
-    #   @hst = province["hst"].to_f/100.0
+
     if session[:province].present?
       province = session[:province]
       @gst = province["gst"].to_f/100.0
@@ -60,29 +55,6 @@ class CartController < ApplicationController
       @pst = 0.0
       @hst = 0.0
     end
-    # tax_rate = {
-    #               AB: [ 0, 0.05, 0 ],
-    #               BC: [ 0.07, 0.05, 0 ],
-    #               MB: [ 0.07, 0.05, 0 ],
-    #               NB: [ 0, 0, 0.15 ],
-    #               NL: [ 0, 0, 0.15 ],
-    #               NT: [ 0, 0.05, 0 ],
-    #               NS: [ 0, 0, 0.15 ],
-    #               NU: [ 0, 0.05, 0 ],
-    #               ON: [ 0, 0, 0.13 ],
-    #               PE: [ 0, 0, 0.15 ],
-    #               QC: [ 0.09975, 0.05, 0 ],
-    #               SK: [ 0.06, 0.05, 0 ],
-    #               YT: [ 0, 0.05, 0 ]
-    #            }
-    # @gst = 0
-    # @pst = 0
-    # @hst = 0
-    # if session[:province].present?
-    #   @gst = tax_rate[session[:province].to_sym][0]
-    #   @pst = tax_rate[session[:province].to_sym][1]
-    #   @hst = tax_rate[session[:province].to_sym][2]
-    # end
   end
 
   def shipping_address
@@ -104,9 +76,7 @@ class CartController < ApplicationController
 
     logger.debug("number: #{@order_number}, customer: #{customer}, address: #{address}, province_id: #{province}, total_cents: #{total_cents}, total_tax_rate: #{total_tax_rate}")
 
-
     order = Order.create(number: @order_number, customer: customer, address: address, province_id: province, total_cents: total_cents, total_tax_rate: total_tax_rate)
-
 
     cart.each do |product|
       if item = session[:cart].find { |cart_product| cart_product["id"]== product.id }
