@@ -1,4 +1,9 @@
 <div class="text-center text-2xl">
 <p class="mb-5">Thank you for your order!</p>
 <p>Your order number is <span class="text-red-400"><%= @order_number %></span></p>
+<p>Please proceed to the checkout process to complete your purchase!</p>
+<%= form_with url: checkout_create_path, method: :post do %>
+    <%= hidden_field_tag(:order_number, @order_number)%>
+    <%= button_tag "Checkout Now"%>
+<% end %>
 </div>
