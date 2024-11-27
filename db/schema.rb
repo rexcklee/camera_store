@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_20_153330) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_27_214553) do
   create_table "abouts", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -121,6 +121,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_20_153330) do
     t.integer "customer_id"
     t.integer "province_id", null: false
     t.decimal "total_tax_rate", precision: 5, scale: 3
+    t.string "payment_id"
     t.index ["customer_id"], name: "index_orders_on_customer_id"
     t.index ["province_id"], name: "index_orders_on_province_id"
   end

@@ -40,15 +40,15 @@ class CheckoutController < ApplicationController
   def success
     checkout = session[:stripe_session_id]
     order_id = session[:order_id]
+
     session[:stripe_session_id] = nil
     session[:order_id] = nil
 
     session = Stripe::Checkout::Session.retrieve(checkout)
     payment_id = session.payment_intent
 
-    logger.debug("Checkout No: #{checkout}, Payment_id:#{payment_id}")
     order = Order.find(order_id)
-    order.update(status: 1)
+    order.update(status: 1, payment_id: payment_id)
   end
 
   def cancel
