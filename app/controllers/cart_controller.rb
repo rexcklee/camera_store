@@ -30,7 +30,7 @@ class CartController < ApplicationController
     end
     redirect_back(fallback_location: root_path)
   end
-  def checkout
+  def order_now
     if current_customer.present?
       address = current_customer.address
       session[:address] = address
@@ -66,7 +66,7 @@ class CartController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  def order
+  def confirm_order
     address = session[:address]
     province = session[:province]["id"]
     total_cents = params[:total_cents]

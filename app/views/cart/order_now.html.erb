@@ -68,7 +68,7 @@
             <% end %>
             <% if province = session[:province] %>
             <div class="w-full text-center">
-                <%= form_with(url: cart_order_path, method: :get, local: true) do |form| %>
+                <%= form_with(url: cart_confirm_order_path, method: :get, local: true) do |form| %>
                 <%= hidden_field_tag(:total_cents, @total_cents)%>
                 <%= hidden_field_tag(:total_tax_rate, @total_tax_rate)%>
                     <div class="hover:text-white border border-gray-200 bg-yellow-400 text-black rounded-md p-2">

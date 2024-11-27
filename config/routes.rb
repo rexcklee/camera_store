@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   get "about" => "about#index", as: "about"
   resources :cart, only: %i[index create destroy]
   get "cart/edit", to: "cart#edit", as: "cart_edit"
-  get "cart/checkout", to: "cart#checkout", as: "cart_checkout"
+  get "cart/order_now", to: "cart#order_now", as: "cart_order_now"
   get "cart/shipping_address", to: "cart#shipping_address", as: "cart_shipping_address"
-  get "cart/order", to: "cart#order", as: "cart_order"
+  get "cart/confirm_order", to: "cart#confirm_order", as: "cart_confirm_order"
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
