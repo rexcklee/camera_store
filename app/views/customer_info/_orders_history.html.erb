@@ -1,0 +1,23 @@
+<% @orders_history.each do |history_order| %>
+        <div class='border-2 border-black w-full mb-10 p-4 rounded-md'>
+                <p>Order Date: <span class="text-yellow-600"><%= history_order.created_at.strftime("%d %b, %Y") %></span></p>
+                <p>Order Number: <span class="text-yellow-600"><%= history_order.number %></span></p>
+                <p>Order Status: <span class="text-yellow-600"><%= history_order.status %></span></p>
+                <p>Order Total: <span class="text-yellow-600"><%= number_to_currency history_order.total_cents/100.0 %></span></p>
+                <p class="mb-3">Total (including tax): <span class="text-yellow-600"><%= number_to_currency history_order.total_cents*(1+history_order.total_tax_rate)/100.0 %></span></p>
+                <% history_order.order_products.each do |ordered_product| %>
+                  <hr>
+                  <div class='flex justify-evenly items-center my-2'>
+                    <p><span class="text-yellow-600"><%= ordered_product.product.name %></span></p>
+                    <p>Qty: <span class="text-yellow-600"><%= ordered_product.quantity %></span></p>
+                    <p>Unit Price: <span class="text-yellow-600"><%= number_to_currency ordered_product.unit_price_cents/100.0 %></span></p>
+                  </div>
+                <% end %>
+                <% if history_order.status == "pending" %>
+                  <%= form_with url: checkout_create_path, method: :post do %>
+                    <%= hidden_field_tag(:order_number, history_order.number)%>
+                    <%= button_tag "Checkout", class:"w-full border rounded-md p-2 shadow-md bg-yellow-500 hover:bg-yellow-400 text-white"%>
+                  <% end %>
+                <% end %>
+        </div>
+      <% end %>

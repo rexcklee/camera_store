@@ -1,0 +1,26 @@
+<div class="flex w-5/6 justify-center items-center mx-auto my-16">
+<div class="basis-1/2">  
+<% if product.image.present? %>
+    <p><%= image_tag(product.image, style: 'height:300px', class:'m-auto') %></p>
+<% end %>
+</div>
+<div class="text-base basis-1/2">  
+  <p class="mb-2">Category: <span class="text-cyan-700"><%= product.category.name %></span></p>
+  <p class="mb-2">Brand: <span class="text-cyan-700"><%= product.brand.name %></span></p>
+  <p class="mb-2">Model: <span class="text-cyan-700"><%= product.name %></span></p>
+  <p class="mb-2">Price: <span class="text-cyan-700"><%= number_to_currency (product.price_cents/100.0) %></span></p>
+  <% if product.description != "" %>
+    <p class="mb-2">Description: <span class="text-cyan-700"><%= product.description %></span></p>
+  <%end%>
+  <% if cart.include?(product)%>
+  <%= button_to cart_path(product), method: :delete do%>
+    <p class='border shadow-md px-4 py-2 bg-red-500 hover:bg-red-400 text-white rounded-md'>Remove from Cart</p>
+    <% end%>
+    <% else %>
+  <%= form_with url: cart_index_path do %>
+    <%= hidden_field_tag(:id, product.id)%>
+    <%= button_tag("Add to cart", class:'border shadow-md px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-white rounded-md') %>
+  <% end %>
+  <%end%>
+</div>
+</div>

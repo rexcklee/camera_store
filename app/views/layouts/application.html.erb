@@ -15,7 +15,7 @@
   <body class="text-black bg-white h-screen flex flex-col justify-between">
     <header>
       <nav class="montserrat">
-        <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 flex flex-wrap items-center justify-between mx-auto px-4 text-sm">
+        <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 flex flex-wrap items-center justify-between mx-auto px-4 text-lg">
           <div class="flex justify-center items-center">
             <%= link_to image_tag( "WBCLogo.png", alt: "Company Logo", class:"size-12"), root_path, class:"text-base"  %>
             <h1><%= link_to 'Winnipeg Best Camera', root_path, class:"text-base" %></h1>
@@ -33,12 +33,12 @@
           <div class="basis-2/12 flex justify-end items-center">
             <% if current_customer != nil %>
                 <p>Hi, <%= current_customer.name %></p>
-                <p><%= link_to icon("user-circle", class:"size-6 hover:text-gray-500 ml-2"), customer_info_edit_path(:id => current_customer.id) %></p>
+                <p><%= link_to icon("user-circle", class:"size-7 hover:text-gray-500 ml-2"), customer_info_edit_path(:id => current_customer.id) %></p>
             <% else %>
-                <p><%= link_to icon("user-circle", class:"size-6 hover:text-gray-500"), new_customer_session_path, class:"" %></p>
+                <p><%= link_to icon("user-circle", class:"size-7 hover:text-gray-500"), new_customer_session_path, class:"" %></p>
             <% end %>
 
-            <%= link_to icon("shopping-cart", class:"size-6 hover:text-gray-500 ml-2") , cart_index_path, class:"" %><%if cart.length()>0%> <p>(<%= cart.length() %>)</p> <%end%>
+            <%= link_to icon("shopping-cart", class:"size-7 hover:text-gray-500 ml-2") , cart_index_path, class:"" %><%if cart.length()>0%> <p>(<%= cart.length() %>)</p> <%end%>
           </div>
         </div>
       </nav>      

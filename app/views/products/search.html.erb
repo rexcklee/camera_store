@@ -1,5 +1,5 @@
 <p class="mb-5">Searching result for: <span class="text-red-400"><%= params[:keywords] %></span> in <span class="text-red-400"><%= params[:category] %></span> category</p>
-<div class="grid grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
 <% @products.each do |product| %>
   <%= render "product", product: product %>
 <%end%>

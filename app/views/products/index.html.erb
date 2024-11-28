@@ -13,12 +13,10 @@
       </div>
     <% end %>
 </div>
-<div class="grid grid-cols-4 gap-4">
-
-<% @products.each do |product| %>
-  <%= render "product", product: product %>
-<% end %>
-
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+  <% @products.each do |product| %>
+    <%= render "product", product: product %>
+  <% end %>
 </div>
 <div class="text-center text-2xl mt-10">
   <%= paginate @products %>

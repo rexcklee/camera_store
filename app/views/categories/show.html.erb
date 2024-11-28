@@ -1,17 +1,7 @@
 <h1 class='text-3xl text-center mb-5'><%= @category.name%> Products</h1>
-<div class="grid grid-cols-4 gap-4">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
 <% @products.each do |product| %>
-<div class='border-2 border-black w-52 m-auto mb-5 p-4 rounded-md'>
-    <div class=''>
-        <% if product.image.present? %>
-          <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
-        <% end %>
-    </div>
-    <div class=''>
-        <p><%= product.brand.name %></p>
-        <h3><%= link_to product.name, product %></h3>
-    </div>
-</div>
+  <%= render "products/product", product: product %>
 <%end%>
 </div>
 <div class="text-center text-2xl mt-10">
