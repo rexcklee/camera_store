@@ -1,51 +1,53 @@
-<div class="flex flex-col text-xl text-black justify-center items-center w-1/2 m-auto">
-  <h1 class="text-2xl text-white mb-10">User Information</h1>
-  <div class="w-full mb-10">
-    <%= form_with(url: customer_info_save_path) do |form| %>
-        <div class="text-black mb-5">
-          <%= form.label :name, class: "text-white" %><br>
-          <%= text_field_tag(:name, @customer_info.name, class: "input w-full", placeholder: "Name") %>
-        </div>
-
-        <div class="text-black mb-10">
-          <%= form.label :address, class: "text-white" %><br>
-          <div class="flex">
-            <%= text_field_tag(:address, @customer_info.address, class: "input", placeholder: "Address", class:"w-full") %>
-            <%# <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %> 
-            <%= form.select :province, options_for_select(Province.all.map {|province| [province.name, province.id]}, @customer_info.province&.id) %>
+<div class="flex flex-col text-base text-black justify-center items-center w-1/2 m-auto">
+    <h1 class="text-2xl mb-5">User Information</h1>
+    <div class="w-full mb-10">
+      <%= form_with(url: customer_info_save_path) do |form| %>
+          <div class="text-black mb-3">
+            <%= form.label :name, class: "" %><br>
+            <%= text_field_tag(:name, @customer_info.name, class: "input w-full", placeholder: "Name") %>
           </div>
-        </div>
 
-        <div class="text-center">
-          <%= button_tag("Update", class: "border rounded-md bg-green-600 text-center text-white text-xl w-full py-2 mb-3 hover:bg-green-500") %>
-        </div>
-    <% end %>
+          <div class="text-black mb-5">
+            <%= form.label :address, class: "" %><br>
+            <div class="flex">
+              <%= text_field_tag(:address, @customer_info.address, class: "input", placeholder: "Address", class:"w-full") %>
+              <%# <%= form.select :province, options_for_select(Order.provinces.keys, @customer_info.province) %> 
+              <%= form.select :province, options_for_select(Province.all.map {|province| [province.name, province.id]}, @customer_info.province&.id) %>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <%= button_tag("Update", class: "border rounded-md bg-yellow-600 hover:bg-yellow-500 text-center text-white text-xl w-full py-2 mb-3 ") %>
+          </div>
+      <% end %>
     </div>
     <% if @orders_history.count() > 0 %>
-    <h1 class="text-2xl text-white mb-10">You have <%= pluralize(@orders_history.count(), 'History Order')%></h1>
-    <% @orders_history.each do |history_order| %>
-      <div class='border-2 border-white w-full mb-5 p-4 rounded-md'>
-              <p>Order Date: <span class="text-yellow-600"><%= history_order.created_at.strftime("%d %b, %Y") %></span></p>
-              <p>Order Number: <span class="text-yellow-600"><%= history_order.number %></span></p>
-              <p>Order Status: <span class="text-yellow-600"><%= history_order.status %></span></p>
-              <p>Order Total: <span class="text-yellow-600"><%= number_to_currency history_order.total_cents/100.0 %></span></p>
-              <p class="mb-3">Total (including tax): <span class="text-yellow-600"><%= number_to_currency history_order.total_cents*(1+history_order.total_tax_rate)/100.0 %></span></p>
-              <% history_order.order_products.each do |ordered_product| %>
-                <hr>
-                <div class='flex justify-evenly items-center my-2'>
-                  <p><span class="text-yellow-600"><%= ordered_product.product.name %></span></p>
-                  <p>Qty: <span class="text-yellow-600"><%= ordered_product.quantity %></span></p>
-                  <p>Unit Price: <span class="text-yellow-600"><%= number_to_currency ordered_product.unit_price_cents/100.0 %></span></p>
-                </div>
-              <% end %>
-              <% if history_order.status == "pending" %>
-                <%= form_with url: checkout_create_path, method: :post do %>
-                  <%= hidden_field_tag(:order_number, history_order.number)%>
-                  <%= button_tag "Checkout", class:"w-full border rounded-md px-2 py-1 bg-yellow-400 hover:text-white"%>
+      <h1 class="text-2xl mb-10">You have <%= pluralize(@orders_history.count(), 'History Order')%></h1>
+      <% @orders_history.each do |history_order| %>
+        <div class='border-2 border-black w-full mb-10 p-4 rounded-md'>
+                <p>Order Date: <span class="text-yellow-600"><%= history_order.created_at.strftime("%d %b, %Y") %></span></p>
+                <p>Order Number: <span class="text-yellow-600"><%= history_order.number %></span></p>
+                <p>Order Status: <span class="text-yellow-600"><%= history_order.status %></span></p>
+                <p>Order Total: <span class="text-yellow-600"><%= number_to_currency history_order.total_cents/100.0 %></span></p>
+                <p class="mb-3">Total (including tax): <span class="text-yellow-600"><%= number_to_currency history_order.total_cents*(1+history_order.total_tax_rate)/100.0 %></span></p>
+                <% history_order.order_products.each do |ordered_product| %>
+                  <hr>
+                  <div class='flex justify-evenly items-center my-2'>
+                    <p><span class="text-yellow-600"><%= ordered_product.product.name %></span></p>
+                    <p>Qty: <span class="text-yellow-600"><%= ordered_product.quantity %></span></p>
+                    <p>Unit Price: <span class="text-yellow-600"><%= number_to_currency ordered_product.unit_price_cents/100.0 %></span></p>
+                  </div>
                 <% end %>
-              <% end %>
-      </div>
-    <%end%>
+                <% if history_order.status == "pending" %>
+                  <%= form_with url: checkout_create_path, method: :post do %>
+                    <%= hidden_field_tag(:order_number, history_order.number)%>
+                    <%= button_tag "Checkout", class:"w-full border rounded-md px-2 py-1 bg-yellow-400 hover:text-white"%>
+                  <% end %>
+                <% end %>
+        </div>
+      <% end %>
     <% end %>
-  
+    <div class="w-full">
+      <%= button_to "Logout",destroy_customer_session_path, method: :delete, class:"w-full border text-white font-bold rounded-md py-2 mb-3 bg-red-500 hover:bg-gray-700" %>
+    </div>
 </div>

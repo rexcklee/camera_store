@@ -2,6 +2,9 @@
 <html>
   <head>
   <title>Camera Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,46 +12,33 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="text-white bg-gradient-to-r from-cyan-900 to-cyan-600 h-screen flex flex-col justify-between">
+  <body class="text-black bg-white h-screen flex flex-col justify-between">
     <header>
-      <nav>
-        <div class="bg-gradient-to-r from-gray-700 to-gray-600 flex flex-wrap items-center justify-between mx-auto p-4 text-lg">
-          <div class="basis-1/12">
-            <h1><%= link_to 'Best Camera', root_path %></h1>
+      <nav class="montserrat">
+        <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 flex flex-wrap items-center justify-between mx-auto px-4 text-sm">
+          <div class="flex justify-center items-center">
+            <%= link_to image_tag( "WBCLogo.png", alt: "Company Logo", class:"size-12"), root_path, class:"text-base"  %>
+            <h1><%= link_to 'Winnipeg Best Camera', root_path, class:"text-base" %></h1>
           </div>
-          <div class="basis-2/12">
+          <div class="">
             <ul class="flex flex-row space-x-8 mr-2">
-              <li class="hover:text-blue-400"><%= link_to 'Home', root_path %></li>
-              <li class="hover:text-blue-400"><%= link_to 'Products', products_path %></li>
-              <li class="hover:text-blue-400"><%= link_to 'About', about_path %></li>
+              <li class="hover:text-gray-500 hover:font-semibold"><%= link_to 'Home', root_path %></li>
+              <li class="hover:text-gray-500 hover:font-semibold"><%= link_to 'Products', products_path %></li>
+              <li class="hover:text-gray-500 hover:font-semibold"><%= link_to 'About', about_path %></li>
             </ul>
           </div>
-          <div class="basis-3/12">
-            <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
-              <div class="container flex justify-center items-center h-4">
-                <div class="text-black">
-                  <%= text_field_tag(:keywords, nil, class: "input w-36", placeholder: 'Search product') %>
-                </div>
-                <div class="text-black">
-                  <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
-                </div>
-                <div class="border border-gray-200 ml-1 bg-gray-500 px-2 py-1 rounded-md hover:bg-gray-700">
-                  <%= submit_tag("Search", class: "button is-primary") %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-          <div class="basis-2/12 flex justify-between items-center">
+          
+
+
+          <div class="basis-2/12 flex justify-end items-center">
             <% if current_customer != nil %>
                 <p>Hi, <%= current_customer.name %></p>
-                <p><%= link_to icon("user-circle", class:"w-8 h-8"), customer_info_edit_path(:id => current_customer.id) %></p>
-                <%= button_to("Logout",destroy_customer_session_path, method: :delete, class:"border rounded-md px-2 py-1 hover:bg-gray-700") %>
+                <p><%= link_to icon("user-circle", class:"size-6 hover:text-gray-500 ml-2"), customer_info_edit_path(:id => current_customer.id) %></p>
             <% else %>
-                <%= link_to 'Login', new_customer_session_path, class:"m-auto border rounded-md px-2 py-1 hover:bg-gray-700" %>
+                <p><%= link_to icon("user-circle", class:"size-6 hover:text-gray-500"), new_customer_session_path, class:"" %></p>
             <% end %>
-          </div>
-          <div class="basis-1/12">
-            <div class="text-center"> <%= link_to "Cart(#{cart.length()})", cart_index_path, class:"border rounded-md px-3 py-2 hover:bg-gray-700" %></div>
+
+            <%= link_to icon("shopping-cart", class:"size-6 hover:text-gray-500 ml-2") , cart_index_path, class:"" %><%if cart.length()>0%> <p>(<%= cart.length() %>)</p> <%end%>
           </div>
         </div>
       </nav>      

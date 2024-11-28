@@ -1,12 +1,11 @@
-<div class='flex justify-center items-center border-2 border-black w-3/5 m-auto mb-5'>
-    <div class='basis-1/2'>
+<div class='border-2 border-black w-52 m-auto mb-5 p-4 rounded-md'>
+    <div class=''>
         <% if product.image.present? %>
-          <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
+          <p><%= link_to image_tag(product.image, style: 'height:150px', class:'m-auto'), product %></p>
         <% end %>
     </div>
-    <div class='p-4 basis-1/2'>
-        <h3>Model: <%= link_to product.name, product %></h3>
-        <p>Brand: <%= product.brand.name %></p>
-        <p>Category: <%= product.category.name %></p>
+    <div class='text-center'>
+        <p class='font-semibold'><%= link_to product.brand.name, product %></p>
+        <h3 class='text-sm'><%= link_to product.name, product %></h3>
     </div>
 </div>

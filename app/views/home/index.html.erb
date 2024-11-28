@@ -1,19 +1,20 @@
 <div class="flex flex-col">
-    <h1 class="text-center text-2xl mb-5">Product <%="Category".pluralize(@categories.count)%></h1>
+    
     <div class="flex justify-evenly mb-16">
         <% @categories.each do |category| %>
-            <div class="bg-white border-4 border-blue-200 rounded-2xl p-3">
+            <div class="p-3">
                 <% if category.image.present? %>
                     <p><%= link_to image_tag(category.image, class:'m-auto h-36') , category %></p>
                 <% end %>
-                <p class="text-center text-2xl text-blue-400 hover:text-blue-500 hover:font-bold">
+                <p class="text-center text-2xl text-blue-950 hover:text-black hover:font-semibold">
                     <%= link_to category.name, category%>
                 </p>
             </div>
         <% end %>
     </div>
+    <% if @new_products.present? %>
     <div class="flex flex-col mb-16">
-        <h1 class="text-center text-2xl mb-5">New <%="Product".pluralize(@new_products.count)%></h1>
+        <h1 class="text-center text-2xl mb-5">New Product</h1>
         <div class="hover:overflow-x-auto overflow-x-hidden flex justify-around items-center">
             <% @new_products.each do |product| %>
             <div class='bg-white text-blue-400 border-2 border-blue-200 min-w-44 min-h-52 p-4 rounded-md mx-2'>
@@ -28,8 +29,10 @@
             <%end%>
         </div>
     </div>
+    <% end %>
+    <% if @updated_products.present? %>
     <div class="flex flex-col mb-16">
-        <h1 class="text-center text-2xl mb-5">Updated <%="Product".pluralize(@updated_products.count)%></h1>
+        <h1 class="text-center text-2xl mb-5">Updated Product</h1>
         <div class="hover:overflow-x-auto overflow-x-hidden  flex justify-around items-center">
             <% @updated_products.each do |product| %>
             <div class='bg-white text-blue-400 border-2 border-blue-200 min-w-44 min-h-52 p-4 rounded-md mx-2'>
@@ -44,4 +47,5 @@
             <%end%>
         </div>
     </div>
+    <% end %>
 </div>
