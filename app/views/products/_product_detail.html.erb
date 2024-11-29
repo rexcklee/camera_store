@@ -1,10 +1,10 @@
-<div class="flex w-5/6 justify-center items-center mx-auto my-16">
+<div class="flex-col w-full sm:flex-row flex sm:w-5/6 justify-center items-center mx-auto my-16">
 <div class="basis-1/2">  
 <% if product.image.present? %>
     <p><%= image_tag(product.image, style: 'height:300px', class:'m-auto') %></p>
 <% end %>
 </div>
-<div class="text-base basis-1/2">  
+<div class="text-base basis-1/2 flex flex-col justify-center items-center sm:block">  
   <p class="mb-2">Category: <span class="text-cyan-700"><%= product.category.name %></span></p>
   <p class="mb-2">Brand: <span class="text-cyan-700"><%= product.brand.name %></span></p>
   <p class="mb-2">Model: <span class="text-cyan-700"><%= product.name %></span></p>

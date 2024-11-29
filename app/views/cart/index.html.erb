@@ -1,43 +1,40 @@
 <div class="flex flex-col">
-<% if session[:cart] != [] %>
-<% cart.each do |product| %>
-<div class='border-2 border-white w-2/3 m-auto mb-5 p-4 rounded-md flex justify-center items-center'>
-    <div class='basis-1/3'>
-        <% if product.image.present? %>
-            <p><%= image_tag(product.image, style: 'height:150px', class:'m-auto') %></p>
-        <% end %>
-    </div>
-    <div class='basis-1/3'>
-        <p><%= product.brand.name %></p>
-        <h3><%= link_to product.name, product %></h3>
-        <% if item = session[:cart].find{ |cart_product| cart_product['id']== product.id}%>
-            <p>Quantity: <%= item['qty'] %></p>
-    </div>
-    <div class='basis-1/3'>
-            <%= form_with(url: cart_edit_path, method: :get, local: true) do |form| %>
-                <%= hidden_field_tag(:id, product.id)%>
-                <div class="flex justify-center items-center mb-2">
-                    <div class="text-black">
-                        <%= form.select :quantity, (1..100).to_a.map{|number| [number,number]}, selected: item['qty'] %>
+    <% if session[:cart] != [] %>
+        <% cart.each do |product| %>
+            <div class='border-2 border-black w-full m-auto mb-5 p-4 rounded-md flex justify-center items-center'>
+                <div class='flex flex-col md:flex-row justify-center items-center basis-1/2'>
+                    <div class='basis-1/2 m-2'>
+                        <% if product.image.present? %>
+                            <p><%= image_tag(product.image, style: 'height:130px', class:'m-auto') %></p>
+                        <% end %>
                     </div>
-                    <div class="border border-gray-200 ml-2 bg-green-700 rounded-md p-2">
-                        <%= submit_tag("Quantity Update", class: "button is-primary") %>
+                    <div class='basis-1/2 m-2'>
+                        <p><%= product.brand.name %></p>
+                        <h3><%= link_to product.name, product %></h3>
+                        <% if item = session[:cart].find{ |cart_product| cart_product['id']== product.id}%>
+                            <p>Quantity: <%= item['qty'] %></p>
+                        <% end %>
                     </div>
                 </div>
-            <% end %>
-    <div class='text-center basis-1/3'>
-        <%= button_to cart_path(product), method: :delete do%>
-            <p class='border-2 p-2 text-white bg-red-400 rounded-md'>Remove</p>
-        <% end%>
-        </div>
-    <% end %>
-    </div>
-</div>
-<%end%>
-<button class="hover:text-black text-2xl border-2 border-stone-950 bg-red-400 w-36 rounded-md m-auto p-2">
-    <%= link_to 'Order Now', cart_order_now_path %>
-</button>
-<%else%>
-<p class="text-3xl text-center"> Cart is empty. </p>
-<%end%>
+                <div class='basis-1/2 flex flex-col justify-center items-center sm:flex-row '>
+                    <div class="w-full">
+                    <%= form_with(url: cart_edit_path, method: :get, local: true) do |form| %>
+                        <%= hidden_field_tag(:id, product.id)%>
+                        <%= form.select :quantity, (1..100).to_a.map{|number| [number,number]}, {selected: item['qty']}, { class: "w-full mb-2" } %>
+                        <%= submit_tag("Quantity Update", class: "bg-green-500 hover:bg-green-400 text-white shadow-md rounded-md p-2 text-center w-full mb-10 sm:mb-0") %>
+                    <% end %>
+                    </div>
+                    <div class="w-full">
+                        <%= button_to "Remove", cart_path(product), method: :delete , class:"bg-red-500 hover:bg-red-400 text-white shadow-md rounded-md p-2 w-full text-center sm:ml-2" %>
+                           
+                    </div>
+                </div>
+            </div>
+        <%end%>
+        <button class="text-xl bg-yellow-500 hover:bg-yellow-400 text-white shadow-md w-44 rounded-md m-auto py-2 px-6">
+            <%= link_to 'Order Now', cart_order_now_path %>
+        </button>
+    <%else%>
+        <p class="text-3xl text-center"> Cart is empty. </p>
+    <%end%>
 </div>
