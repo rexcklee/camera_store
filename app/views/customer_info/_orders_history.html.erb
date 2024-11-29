@@ -1,5 +1,5 @@
 <% @orders_history.each do |history_order| %>
-        <div class='border-2 border-black w-full mb-10 p-4 rounded-md'>
+        <div class='border border-black w-full mb-10 p-4 rounded-md'>
                 <p>Order Date: <span class="text-yellow-600"><%= history_order.created_at.strftime("%d %b, %Y") %></span></p>
                 <p>Order Number: <span class="text-yellow-600"><%= history_order.number %></span></p>
                 <p>Order Status: <span class="text-yellow-600"><%= history_order.status %></span></p>
@@ -7,7 +7,7 @@
                 <p class="mb-3">Total (including tax): <span class="text-yellow-600"><%= number_to_currency history_order.total_cents*(1+history_order.total_tax_rate)/100.0 %></span></p>
                 <% history_order.order_products.each do |ordered_product| %>
                   <hr>
-                  <div class='flex justify-evenly items-center my-2'>
+                  <div class='flex flex-col md:flex-row justify-evenly items-center my-2'>
                     <p><span class="text-yellow-600"><%= ordered_product.product.name %></span></p>
                     <p>Qty: <span class="text-yellow-600"><%= ordered_product.quantity %></span></p>
                     <p>Unit Price: <span class="text-yellow-600"><%= number_to_currency ordered_product.unit_price_cents/100.0 %></span></p>

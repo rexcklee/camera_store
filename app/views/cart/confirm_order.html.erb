@@ -1,11 +1,11 @@
 <div class="flex flex-col">
-    <div class="text-center text-2xl">
+    <div class="text-center text-xl">
         <p class="mb-5">Thank you for your order!</p>
         <p class="mb-5">Your order number is <span class="text-red-400"><%= @order_number %></span></p>
         <p class="mb-5">Please proceed to the checkout process to complete your purchase!</p>
         <%= form_with url: checkout_create_path, method: :post do %>
             <%= hidden_field_tag(:order_number, @order_number)%>
-            <%= button_tag "Checkout", class:"m-auto border rounded-md px-2 py-1 bg-yellow-400 hover:text-white"%>
+            <%= button_tag "Checkout", class:"m-auto hover:bg-yellow-400 bg-yellow-500 text-white shadow-md rounded-md px-6 py-2"%>
         <% end %>
     </div>
 </div>

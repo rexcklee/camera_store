@@ -8,7 +8,7 @@
           <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
         </div>
         <div class="">
-          <%= button_tag "Search", class:"border rounded-md ml-1 p-2 bg-yellow-600 hover:bg-yellow-500"%>
+          <%= button_tag "Search", class:"bg-yellow-500 hover:bg-yellow-400 text-white shadow-md rounded-md ml-1 p-2"%>
         </div>
       </div>
     <% end %>
