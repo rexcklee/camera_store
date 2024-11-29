@@ -8,6 +8,18 @@ class ApplicationController < ActionController::Base
 
   helper_method :cart
 
+  def set_menu_state_true
+    session[:menu_state] = true
+    logger.debug("Change menu state to true: #{session[:menu_state]}")
+    redirect_back(fallback_location: root_path)
+  end
+
+  def set_menu_state_false
+    session[:menu_state] = false
+    logger.debug("Change menu state to false: #{session[:menu_state]}")
+    redirect_back(fallback_location: root_path)
+  end
+
   private
   def load_store_contact
     @main_store_contact = StoreContact.first
@@ -17,6 +29,7 @@ class ApplicationController < ActionController::Base
     session[:cart] ||= []
     session[:address] ||= nil
     session[:province] ||= nil
+    session[:menu_state] ||= false
   end
 
   def cart

@@ -25,6 +25,11 @@ Rails.application.routes.draw do
     get "cancel", to: "checkout#cancel", as: "checkout_cancel"
   end
 
+  scope "/application" do
+    get "set_menu_state_true", to: "application#set_menu_state_true", as: "application_set_menu_state_true"
+    get "set_menu_state_false", to: "application#set_menu_state_false", as: "application_set_menu_state_false"
+  end
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
