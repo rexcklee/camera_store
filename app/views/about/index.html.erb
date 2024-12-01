@@ -1,14 +1,14 @@
-<div class="flex flex-col">
+<div class="flex flex-col montserrat">
     <% @abouts.each do |about| %>
-    <div class="text-3xl text-center mb-10">
+    <div class="text-3xl text-center my-10 underline">
         <h1><%= about.title %></h1>
     </div>
-    <div class="text-2xl mb-10">
+    <div class="text-xl mb-10 mx-20">
         <p class="mb-5"><%= about.content %></p>
     </div>
     <%end%>
 
-    <h1 class="text-center text-3xl">Our Shops</h1>
+    <h1 class="text-center text-3xl underline">Our Shop</h1>
     <div class="flex flex-wrap items-center justify-between mx-auto p-10 text-xl">
     <% @store_contacts.each do |contact| %>
         <div class="text-lg px-8 py-4">
@@ -16,7 +16,7 @@
             <p class="mb-5">E-mail: <%= contact.email %></h1>
             <p >Address: <%= contact.location %></h1>
         </div>
-        <div class="text-lg px-8 py-4">
+        <div class="text-lg px-8 py-4 ">
             <p>Open hours:</p>
             <p class="">Mon: <%= contact.open_mon %></p>
             <p class="">Tue: <%= contact.open_tue %></p>
