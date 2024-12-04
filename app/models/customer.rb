@@ -8,5 +8,5 @@ class Customer < ApplicationRecord
 
   belongs_to :province, optional: true
 
-  # enum :province, [ :AB, :BC, :MB, :NB, :NL, :NT, :NS, :NU, :ON, :PE, :QC, :SK, :YT ]
+  validates :email, presence: true, uniqueness: true
 end

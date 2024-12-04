@@ -7,7 +7,7 @@ class CartController < ApplicationController
     product_ids_array = cart_products.map { |product| product["id"] }
     unless product_ids_array.include?(product_id)
       session[:cart] << { "id": product_id, "qty": 1 }
-      flash[:notice] = "Item added."
+      flash[:notice] = "Item added"
     end
     redirect_back(fallback_location: root_path)
   end
@@ -16,7 +16,7 @@ class CartController < ApplicationController
     product_id = params[:id].to_i
     if (delete_product = session[:cart].find { |product| product["id"]==product_id })
       session[:cart].delete(delete_product)
-      flash[:notice] = "Item removed."
+      flash[:alert] = "Item removed"
     end
     redirect_back(fallback_location: root_path)
   end

@@ -5,7 +5,7 @@
                 <div class='flex flex-col sm:flex-row justify-center items-center basis-1/2'>
                     <div class='basis-1/2 m-2'>
                         <% if product.image.present? %>
-                            <p><%= image_tag(product.image, style: 'height:130px', class:'m-auto') %></p>
+                            <p><%= image_tag(product.image, alt:'product image', style: 'height:130px', class:'m-auto') %></p>
                         <% end %>
                     </div>
                     <div class='basis-1/2 m-2'>
@@ -19,21 +19,20 @@
                 <div class='basis-1/2 flex flex-col justify-center items-center sm:flex-row '>
                     <div class="w-full">
                     <%= form_with(url: cart_edit_path, method: :get, local: true) do |form| %>
-                        <%= hidden_field_tag(:id, product.id)%>
+                        <input type="hidden" name="id" id="id" value=<%= product.id %>>
                         <%= form.select :quantity, (1..100).to_a.map{|number| [number,number]}, {selected: item['qty']}, { class: "w-full mb-2" } %>
                         <%= submit_tag("Quantity Update", class: "bg-green-500 hover:bg-green-400 text-white shadow-md rounded-md p-2 text-center w-full mb-10 sm:mb-0") %>
                     <% end %>
                     </div>
                     <div class="w-full">
                         <%= button_to "Remove", cart_path(product), method: :delete , class:"bg-red-500 hover:bg-red-400 text-white shadow-md rounded-md p-2 w-full text-center sm:ml-2" %>
-                           
                     </div>
                 </div>
             </div>
         <%end%>
-        <button class="text-xl bg-yellow-500 hover:bg-yellow-400 text-white shadow-md w-44 rounded-md m-auto py-2 px-6">
+        <p class="text-xl bg-yellow-500 hover:bg-yellow-400 text-white shadow-md w-44 rounded-md m-auto py-2 px-6 text-center">
             <%= link_to 'Order Now', cart_order_now_path %>
-        </button>
+        </p>
     <%else%>
         <p class="text-3xl text-center"> Cart is empty. </p>
     <%end%>

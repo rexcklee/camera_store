@@ -5,4 +5,7 @@ class Order < ApplicationRecord
   belongs_to :province
 
   enum :status, [ :pending, :paid, :shipped ]
+
+  validates :number, presence: true, uniqueness: true
+  validates :number, :province_id, :customer_id, presence: true
 end

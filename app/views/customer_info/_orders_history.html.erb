@@ -15,7 +15,8 @@
                 <% end %>
                 <% if history_order.status == "pending" %>
                   <%= form_with url: checkout_create_path, method: :post do %>
-                    <%= hidden_field_tag(:order_number, history_order.number)%>
+                    
+                    <input type="hidden" name="order_number" id="<%= history_order.number %>_order_number" value=<%= history_order.number %>>
                     <%= button_tag "Checkout", class:"w-full border rounded-md p-2 shadow-md bg-yellow-500 hover:bg-yellow-400 text-white"%>
                   <% end %>
                 <% end %>
