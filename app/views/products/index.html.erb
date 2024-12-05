@@ -1,23 +1,24 @@
-<div class="min-h-16 p-4">
-    <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
-      <div class="container flex justify-center items-center h-4">
-        <div class="text-black">
-          <%= text_field_tag(:keywords, nil, class: "input w-36", placeholder: 'Search product') %>
+
+  <div class="w-full sm:max-w-screen-md sm:mx-auto">
+      <%= form_with(url: products_search_path, method: :get, local: true) do |form| %>
+        <div class="flex flex-col sm:flex-row justify-start sm:justify-center items-center">
+          <div class="text-black w-full">
+            <%= text_field_tag(:keywords, nil, class: "input w-full", placeholder: 'Search product') %>
+          </div>
+          <div class="text-black w-full">
+            <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }, {}, { class: "w-full" } %>
+          </div>
+          <div class="">
+            <%= button_tag "Search", class:"bg-yellow-500 hover:bg-yellow-400 text-white shadow-md rounded-md ml-0 sm:ml-1 mt-2 sm:mt-0 py-2 px-4 "%>
+          </div>
         </div>
-        <div class="text-black">
-          <%= form.select :category, [["All category", "All"]] + Category.all.map { |category| [category.name, category.name] }  %>
-        </div>
-        <div class="">
-          <%= button_tag "Search", class:"bg-yellow-500 hover:bg-yellow-400 text-white shadow-md rounded-md ml-1 p-2"%>
-        </div>
-      </div>
+      <% end %>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
+    <% @products.each do |product| %>
+      <%= render "product", product: product %>
     <% end %>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:gap-4">
-  <% @products.each do |product| %>
-    <%= render "product", product: product %>
-  <% end %>
-</div>
-<div class="text-center text-2xl mt-10">
-  <%= paginate @products %>
-</div>
+  </div>
+  <div class="text-center text-2xl mt-10">
+    <%= paginate @products %>
+  </div>

@@ -52,7 +52,6 @@
             <% if !current_customer.present? || !current_customer.province.present? %>
                 <div class="w-full">
                     <%= form_with(url: cart_shipping_address_path, method: :get, local: true) do |form| %>
-                    
                     <input type="hidden" name="total_cents" id="total_cents" value=<%= @total_cents %>>
                     <div class="flex flex-col xl:flex-row mb-2 w-full">
                         <%= text_field_tag(:address, nil, class: "input", placeholder: 'Shipping Address', class:"basis-2/3") %>
@@ -61,8 +60,6 @@
                             <%= submit_tag("Update", class: "button is-primary") %>
                         </div>
                     </div>
-
-
                     <% end %>
                 </div>
             <% end %>
