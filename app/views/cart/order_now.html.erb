@@ -6,7 +6,7 @@
         <div class=' bg-slate-50 shadow-md shadow-yellow-800 w-full m-auto mb-5 p-4 rounded-md flex justify-center items-center'>
             <div class='basis-5/12'>
                 <% if product.image.present? %>
-                    <p><%= image_tag(product.image, alt:'product image', style: 'height:150px', class:'m-auto') %></p>
+                    <p><%= image_tag(product.image.variant(:small_img), alt:'product image', style: 'height:150px', class:'m-auto') %></p>
                 <% end %>
             </div>
             <div class='basis-7/12 text-center'>

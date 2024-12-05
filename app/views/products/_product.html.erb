@@ -1,11 +1,11 @@
 <div class='max-w-48 min-w-48 max-h-52 min-h-52 m-auto mb-5 p-4 mx-auto rounded-md flex flex-col justify-end'>
     <div class=''>
         <% if product.image.present? %>
-          <p><%= link_to image_tag(product.image, alt: "product image", style: 'height:130px', class:'m-auto'), product %></p>
+          <p><%= link_to image_tag(product.image.variant(:small_img), alt: "product image", style: 'height:130px', class:'m-auto'), product %></p>
         <% end %>
     </div>
     <div class='text-center'>
-        <p class='font-semibold'><%= link_to product.brand.name, product %></p>
-        <h3 class='text-sm'><%= link_to product.name, product %></h3>
+        <p class='font-semibold truncate'><%= link_to product.brand.name, product %></p>
+        <p class='text-sm truncate'><%= link_to product.name, product %></p>
     </div>
 </div>

@@ -76,3 +76,5 @@ gem "kaminari"
 gem "rails_icons"
 
 gem "stripe"
+
+gem "image_processing"

@@ -3,7 +3,7 @@
         <% @categories.each do |category| %>
             <div class="p-3">
                 <% if category.image.present? %>
-                    <p><%= link_to image_tag(category.image, class:'m-auto h-36') , category %></p>
+                    <p><%= link_to image_tag(category.image.variant(:small_img), class:'m-auto h-36') , category %></p>
                 <% end %>
                 <p class="montserrat text-center text-2xl text-blue-950 hover:text-yellow-600 hover:font-semibold">
                     <%= link_to category.name, category%>

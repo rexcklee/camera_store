@@ -7,7 +7,7 @@ ActiveAdmin.register Product do
     f.semantic_errors
     f.inputs
     f.inputs do
-      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image, style: "height:200px") : ""
+      f.input :image, as: :file, hint: f.object.image.present? ? image_tag(f.object.image.variant(:large_img), style: "height:300px") : ""
     end
     f.actions
   end
@@ -25,7 +25,7 @@ ActiveAdmin.register Product do
     column :created_at
     column :updated_at
     column "Image" do |product|
-      product.image.present? ? image_tag(product.image, style: "height:100px") : ""
+      product.image.present? ? image_tag(product.image.variant(:thumb), style: "height:50px") : ""
     end
     actions
   end
