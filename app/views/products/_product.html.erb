@@ -2,6 +2,8 @@
     <div class=''>
         <% if product.image.present? %>
           <p><%= link_to image_tag(product.image.variant(:small_img), alt: "product image", style: 'height:130px', class:'m-auto'), product %></p>
+        <% else %>
+          <p><%= link_to image_tag("images-coming-soon.png", alt: "product image", style: 'height:130px', class:'m-auto'), product %></p>
         <% end %>
     </div>
     <div class='text-center'>
