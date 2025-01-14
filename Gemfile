@@ -82,3 +82,5 @@ gem "stripe"
 gem "image_processing"
 
 gem "ruby-vips"
+
+gem 'mysql2', '~> 0.5'

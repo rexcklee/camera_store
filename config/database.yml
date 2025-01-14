@@ -6,7 +6,8 @@
 #
 default: &default
   adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   timeout: 5000
 
 development:
@@ -26,7 +27,7 @@ test:
 production:
   primary:
     <<: *default
-    database: storage/production.sqlite3
+    database: <%= Rails.root.join("storage", "production.sqlite3") %>
   cache:
     <<: *default
     database: storage/production_cache.sqlite3
@@ -39,3 +40,11 @@ production:
     <<: *default
     database: storage/production_cable.sqlite3
     migrations_paths: db/cable_migrate
+  # adapter: mysql2
+  # encoding: utf8mb4
+  # pool: 5
+  # database: camera_store_production
+  # username: camera_rexlee
+  # password: rl123456
+  # host: localhost
+  # port: 3306

@@ -35,3 +35,14 @@
 
 /app/assets/builds/*
 !/app/assets/builds/.keep
+/app/assets/*
+
+# Precompiled assets
+/public/assets/*
+/public/packs/*
+/public/uploads/*
+
+# Cache
+/node_modules
+/.bundle
+/vendor/bundle
