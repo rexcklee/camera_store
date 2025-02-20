@@ -71,7 +71,7 @@ gem "sass-rails"
 
 gem "faker", "~> 3.5.1"
 
-gem "tailwindcss-rails", "~> 3.0"
+gem "tailwindcss-rails", "~> 4.1"
 
 gem "kaminari"
 
